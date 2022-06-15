@@ -7,16 +7,32 @@
     <title>Listas Bases de datos</title>
 </head>
 <body>
+    <?php
+        $db = $_GET["db"];
+        $tabla = $_GET["tabla"];
+    ?>
     <h1>Datos tabla de <?php echo $_GET["tabla"]; ?> </h1>
     <?php
         use ITEC\PRESENCIAL\DAW\BDLIST\bd;
         include_once "../vendor/autoload.php";
 
         $bd = new bd ();
-        $resultado = $bd->Select("Select * from ". $_GET["db"] .";");
-        for($i=0;$i<count($resultado);$i++){
-            echo '<div><a href=database.php?db='.$resultado[$i]["Tables_in_".$_GET["db"]].'>'.$resultado[$i]["Tables_in_".$_GET["db"]].'</a></div>';
+        $resultado = $bd->Select("Select * from ". $db . ".". $tabla .";");
+        $cabeceras = array_keys($resultado[0]);
+        $code = "<table><tr>";
+        for ($i=0;$i<count($cabeceras);$i++){
+            $code.="<th>$cabeceras[$i]</th>";
         }
+        $code .= "</tr>";
+        for($i=0;$i<count($resultado);$i++){
+            $code .= "<tr>";
+            foreach($resultado[$i] as $campo =>$valor){
+                $code.="<td>$valor</td>";
+            }
+            $code .= "</tr>";           
+        }
+        $code.="</table>";
+        echo $code;
     ?>
 
 
