@@ -15,7 +15,8 @@
         $bd = new bd ();
         $resultado = $bd->Select("SHOW DATABASES;");
         for($i=0;$i<count($resultado);$i++){
-            echo '<div><a href=database.php?db='.$resultado[$i]["Database"].'>'.$resultado[$i]["Database"].'</a></div>';
+            echo '<div><a href=database.php?db='.$resultado[$i]["Database"].'>'.
+                $resultado[$i]["Database"].'</a></div>';
         }
     ?>
 

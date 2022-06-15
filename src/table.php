@@ -7,15 +7,15 @@
     <title>Listas Bases de datos</title>
 </head>
 <body>
-    <h1>Listado tablas de <?php echo $_GET["db"]; ?> </h1>
+    <h1>Datos tabla de <?php echo $_GET["tabla"]; ?> </h1>
     <?php
         use ITEC\PRESENCIAL\DAW\BDLIST\bd;
         include_once "../vendor/autoload.php";
 
         $bd = new bd ();
-        $resultado = $bd->Select("SHOW tables from ". $_GET["db"] .";");
+        $resultado = $bd->Select("Select * from ". $_GET["db"] .";");
         for($i=0;$i<count($resultado);$i++){
-            echo '<div><a href=database.php?db='.$_GET["db"].'&tabla='.$resultado[$i]["Tables_in_".$_GET["db"]].'>'.$resultado[$i]["Tables_in_".$_GET["db"]].'</a></div>';
+            echo '<div><a href=database.php?db='.$resultado[$i]["Tables_in_".$_GET["db"]].'>'.$resultado[$i]["Tables_in_".$_GET["db"]].'</a></div>';
         }
     ?>
 
